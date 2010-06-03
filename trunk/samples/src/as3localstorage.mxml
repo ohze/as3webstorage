@@ -12,6 +12,8 @@
 	</fx:Style>
 	<fx:Script>
 		<![CDATA[
+			import com.google.code.as3webstorage.localStorage;
+			
 			import mx.collections.ArrayCollection;
 			
 			[Bindable]

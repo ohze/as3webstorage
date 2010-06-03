@@ -83,10 +83,6 @@
 		]]>
 	</fx:Script>
 
-	<fx:Declarations>
-		<!-- 非ビジュアルエレメント (サービス、値オブジェクトなど) をここに配置 -->
-	</fx:Declarations>
-
 	<mx:Form x="10" y="10">
 		<mx:FormHeading label="sessionStorage.getItem()"/>
 		<s:Label text="key"/>

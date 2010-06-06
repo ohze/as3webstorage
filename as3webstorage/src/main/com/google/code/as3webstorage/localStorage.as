@@ -27,7 +27,7 @@ package com.google.code.as3webstorage
     {
         public static function length():uint
         {
-            return ExternalInterface.call("function() {return localStorage.length;}");
+            return ExternalInterface.call("function() { return localStorage.length; }");
         }
 
         public static function key(index:uint):*
@@ -45,7 +45,7 @@ package com.google.code.as3webstorage
             ExternalInterface.call("localStorage.setItem", key, data);
         }
 
-        public static function removeItem(key:String):*
+        public static function removeItem(key:String):void
         {
             ExternalInterface.call("localStorage.removeItem", key);
         }

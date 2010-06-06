@@ -25,6 +25,11 @@ package com.google.code.as3webstorage
 
     public class localStorage
     {
+		public static function avaliable():Boolean
+		{
+			return ExternalInterface.available && ExternalInterface.call("function() { return typeof localStorage != 'undefined'; }");
+		}
+		
         public static function length():uint
         {
             return ExternalInterface.call("function() { return localStorage.length; }");

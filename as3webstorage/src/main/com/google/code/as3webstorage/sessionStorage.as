@@ -25,9 +25,14 @@ package com.google.code.as3webstorage
 
     public class sessionStorage
     {
+		public static function avaliable():Boolean
+		{
+			return ExternalInterface.available && ExternalInterface.call("function() { return typeof sessionStorage != 'undefined'; }");
+		}
+		
         public static function length():uint
         {
-            return ExternalInterface.call("function() {return sessionStorage.length;}");
+            return ExternalInterface.call("function() { return sessionStorage.length; }");
         }
 
         public static function key(index:uint):*
@@ -45,7 +50,7 @@ package com.google.code.as3webstorage
             ExternalInterface.call("sessionStorage.setItem", key, data);
         }
 
-        public static function removeItem(key:String):*
+        public static function removeItem(key:String):void
         {
             ExternalInterface.call("sessionStorage.removeItem", key);
         }

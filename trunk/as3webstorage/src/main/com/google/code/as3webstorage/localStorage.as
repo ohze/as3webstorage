@@ -59,5 +59,12 @@ package com.google.code.as3webstorage
         {
             ExternalInterface.call("localStorage.clear");
         }
+		
+		public static function addStorageEventListener(func:Function):void
+		{
+			ExternalInterface.call("as3webstorage.assignSwf", ExternalInterface.objectID);
+			ExternalInterface.addCallback("callbackToAs", func);
+			ExternalInterface.call("as3webstorage.addStorageEventListener", "callbackToAs");
+		}
     }
 }

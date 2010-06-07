@@ -8,7 +8,7 @@
             this.swf = document.all ? window[swfId] : document[swfId];
         },
 
-        addStorageEventListener: function(callback) {
+        addStorageEventListener: function(callback, useCapture) {
             window.addEventListener("storage", function(event) {
                 var returnObject = {
                     "key": event.key,
@@ -20,7 +20,7 @@
                 };
 
                 as3webstorage.toNativeFunc(as3webstorage.swf, callback).apply(null, [returnObject]);
-            }, false);
+            }, useCapture);
         },
         
         toNativeFunc: function(obj, functionName) {

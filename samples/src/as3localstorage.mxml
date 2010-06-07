@@ -33,7 +33,7 @@
                 }
 
 //				Chromeブラウザでstorageイベントのfireがされないため、それに伴ったデータの表示更新ができない。
-                localStorage.addStorageEventListener(updateData);
+//              localStorage.addStorageEventListener(updateData);
 
                 updateData();
             }

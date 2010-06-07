@@ -23,48 +23,116 @@ package com.google.code.as3webstorage
 {
 	import flash.external.ExternalInterface;
 	
+	/**
+	 * ActionScriptからWeb Storage API(sessionStorage)を簡単に利用できるラッパーユーティリティです.
+	 * 
+	 * <p>以下のインターフェース仕様に従ってラッパーを提供していますが, 一部独自に追加しているものがあります.</p>
+	 * <p>Ref. W3C Web Storage - <a href="http://dev.w3.org/html5/webstorage/#storage-0">4.1 The Storage interface</a></p>
+	 * <pre>
+	 * interface Storage {
+	 *   readonly attribute unsigned long length;
+	 *   getter DOMString key(in unsigned long index);
+	 *   getter any getItem(in DOMString key);
+	 *   setter creator void setItem(in DOMString key, in any data);
+	 *   deleter void removeItem(in DOMString key);
+	 *   void clear();
+	 * };</pre>
+	 * 
+	 * @author shoito
+	 */
 	public class sessionStorage
 	{
-		public static function avaliable():Boolean
-		{
-			return ExternalInterface.available && ExternalInterface.call("function() { return typeof sessionStorage != 'undefined'; }");
-		}
-		
+		/**
+		 * Storageに格納されているデータの数を返します.
+		 * 
+		 * @return Storageに格納されているアイテムの数 
+		 */
 		public static function length():uint
 		{
 			return ExternalInterface.call("function() { return sessionStorage.length; }");
 		}
 		
+		/**
+		 * index番目のデータのキーを返します.
+		 * 
+		 * @param index インデックス
+		 * @return キー
+		 */
 		public static function key(index:uint):*
 		{
 			return ExternalInterface.call("sessionStorage.key", index);
 		}
 		
+		/**
+		 * キーに対するデータを返します.
+		 * 
+		 * @param key キー
+		 * @return キーに対するアイテム
+		 */
 		public static function getItem(key:String):*
 		{
 			return ExternalInterface.call("sessionStorage.getItem", key);
 		}
 		
+		/**
+		 * Storageにデータをセットします.
+		 * 
+		 * @param key データに対するキー
+		 * @param data データ
+		 */
 		public static function setItem(key:String, data:*):void
 		{
 			ExternalInterface.call("sessionStorage.setItem", key, data);
 		}
 		
+		/**
+		 * Storageからキーに対するデータを削除します.
+		 * 
+		 * @param key データに対するキー
+		 */
 		public static function removeItem(key:String):void
 		{
 			ExternalInterface.call("sessionStorage.removeItem", key);
 		}
 		
+		/**
+		 * Storageのデータを全て消去します.
+		 */
 		public static function clear():void
 		{
 			ExternalInterface.call("sessionStorage.clear");
 		}
 		
-		public static function addStorageEventListener(func:Function):void
+		/**
+		 * as3webstorageが実行中のブラウザで機能するかどうか返します.
+		 * 
+		 * @return as3webstorageが機能する場合は<code>true</code>, 機能しない場合は<code>false</code>
+		 */
+		public static function avaliable():Boolean
+		{
+			return ExternalInterface.available && ExternalInterface.call("function() { return typeof sessionStorage != 'undefined'; }");
+		}
+		
+		/**
+		 * storage eventのリスナーを追加します.
+		 * 
+		 * @param func JavaScript側のwindowオブジェクトからstorage eventが発行された場合に, 実行される関数
+		 * 
+		 * @example Storageのデータが追加/削除された際に, reloadData()関数を呼ぶようにします.
+		 * <listing>
+		 * sessionStorage.addStorageEventListener(reloadData);
+		 * ...
+		 * private function reloadData(event:*=null):void
+		 * {
+		 *   ...
+		 * }
+		 * </listing>
+		 */
+		public static function addStorageEventListener(func:Function, useCapture:Boolean = false):void
 		{
 			ExternalInterface.call("as3webstorage.assignSwf", ExternalInterface.objectID);
 			ExternalInterface.addCallback("callbackToAs", func);
-			ExternalInterface.call("as3webstorage.addStorageEventListener", "callbackToAs");
+			ExternalInterface.call("as3webstorage.addStorageEventListener", "callbackToAs", useCapture);
 		}
 	}
 }

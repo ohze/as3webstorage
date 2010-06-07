@@ -29,8 +29,8 @@
 					return;
 				}
 				
-				// Chromeブラウザでstorageイベントのfireがされないため、それに伴ったデータの表示更新ができない。
-				sessionStorage.addStorageEventListener(updateData);
+//				Chromeブラウザでstorageイベントのfireがされないため、それに伴ったデータの表示更新ができない。
+//				sessionStorage.addStorageEventListener(updateData);
 				
 				updateData();
 			}

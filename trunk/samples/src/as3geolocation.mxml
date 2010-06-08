@@ -3,7 +3,8 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   xmlns:maps="com.google.maps.*" 
-			   minWidth="955" minHeight="600">
+			   minWidth="955" minHeight="600"
+			   applicationComplete="onApplicationComplete(event)">
 	<fx:Script>
 		<![CDATA[
 			import com.google.code.as3geolocation.Geolocation;
@@ -17,7 +18,17 @@
 			import com.google.maps.styles.StrokeStyle;
 			
 			import mx.controls.Alert;
+			import mx.events.FlexEvent;
 			
+			private function onApplicationComplete(event:FlexEvent):void
+			{
+				if (!Geolocation.avaliable())
+				{
+					Alert.show("ブラウザがExternal Interface API、またはGeolocation APIをサポートしていません。Chrome, Firefoxなど両機能をサポートするブラウザをご利用ください。", "確認");
+					return;
+				}
+			}
+
 			private function onMapReady(event:Event):void {
 				setPosition({
 					coords:{
@@ -68,5 +79,5 @@
 			  width="100%" height="100%" 
 			  key="ABQIAAAAk2WIIRljTftjpYZECLawyxRWTAkRKJS7h1XjKaOTqACHuw1n0BTFWfuNRQMOrL1scYHAvOkQAii_lQ"/>
 	<s:Button x="15" y="15" height="50" label="getCurrentPosition" id="getPositionButton" click="getPositionButton_clickHandler(event)"/>
-	<s:TextArea id="latLngText" x="15" y="80" width="240"/>
+	<s:TextArea id="latLngText" x="15" y="80" width="240" alpha="0.6"/>
 </s:Application>

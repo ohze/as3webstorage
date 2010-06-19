@@ -23,7 +23,7 @@
 			
 			private function onApplicationComplete(event:FlexEvent):void
 			{
-				if (!SessionStorage.avaliable())
+				if (!SessionStorage.available())
 				{
 					Alert.show("ブラウザがExternal Interface API、またはSession Storageをサポートしていません。両方をサポートするブラウザをご利用ください。", "確認");	
 					return;

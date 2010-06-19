@@ -4,7 +4,7 @@
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   xmlns:maps="com.google.maps.*" 
 			   minWidth="955" minHeight="600"
-			   applicationComplete="onApplicationComplete(event)">
+			   applicationComplete="onApplicationComplete(event)" viewSourceURL="srcview/index.html">
 	<fx:Script>
 		<![CDATA[
 			import com.google.code.as3geolocation.Geolocation;
@@ -22,7 +22,7 @@
 			
 			private function onApplicationComplete(event:FlexEvent):void
 			{
-				if (!Geolocation.avaliable())
+				if (!Geolocation.available())
 				{
 					Alert.show("ブラウザがExternal Interface API、またはGeolocation APIをサポートしていません。Chrome, Firefoxなど両機能をサポートするブラウザをご利用ください。", "確認");
 					return;

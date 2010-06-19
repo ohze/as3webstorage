@@ -108,7 +108,7 @@ package com.google.code.as3webstorage
 		 * 
 		 * @return as3webstorageが機能する場合は<code>true</code>, 機能しない場合は<code>false</code>
 		 */
-		public static function avaliable():Boolean
+		public static function available():Boolean
 		{
 			return ExternalInterface.available && ExternalInterface.call("function() { return typeof localStorage != 'undefined'; }");
 		}

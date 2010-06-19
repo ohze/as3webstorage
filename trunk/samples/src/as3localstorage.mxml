@@ -26,7 +26,7 @@
 
             private function onApplicationComplete(event:FlexEvent):void
             {
-                if (!LocalStorage.avaliable())
+                if (!LocalStorage.available())
                 {
                     Alert.show("ブラウザがExternal Interface API、またはLocal Storageをサポートしていません。両方をサポートするブラウザをご利用ください。", "確認");
                     return;

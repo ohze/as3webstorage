@@ -34,7 +34,7 @@
                     parameters.join(','), 
                     'this["' + functionName + '"](' + parameters.join(',') + ')' 
                 ).apply(obj, arguments);
-            }
+            };
         }
-    }
+    };
 })();
